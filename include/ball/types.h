@@ -19,7 +19,7 @@ typedef struct {
 } vector_t;
 
 typedef struct ball {
-	object_t block;
+	object_t *block;
 	vector_t vector;
 	void (*apply_next_move)(struct ball *bl);
 	void (*apply_prev_move)(struct ball *bl);

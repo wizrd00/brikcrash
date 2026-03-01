@@ -4,7 +4,7 @@
 #include "types.h"
 
 typedef struct brick {
-	object_t block;
+	object_t *block;
 	edge_t edge;
 	collide_t (*collide)(struct brick *bk, size_t x, size_t y);
 } brick_t;

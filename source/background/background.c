@@ -1,42 +1,22 @@
 #include "background/background.h"
 
-static collide_t collide(struct background *bg, size_t x, size_t y)
+static collide_t collide(struct background *bg, coordinate_t *cd)
 {
 	collide_t _coll;
 	size_t top_edge = bg->edge.top_edge + 1;
 	size_t bottom_edge = bg->edge.btm_edge - 1;
 	size_t right_edge = bg->edge.rit_edge - 1;
 	size_t left_edge = bg->edge.lft_edge + 1;
-	if (COLLIDE_TOP_EDGE(y)) {
-		if (COLLIDE_RIGHT_EDGE(x))
-			_coll = TOP_RIGHT_CORNER;
-		else if (COLLIDE_LEFT_EDGE(x))
-			_coll = TOP_LEFT_CORNER;
-		else
-			_coll = TOP_EDGE;
-	} else if (COLLIDE_BOTTOM_EDGE(y)) {
-		if (COLLIDE_RIGHT_EDGE(x))
-			_coll = BOTTOM_RIGTH_CORNER;
-		else if (COLLIDE_LEFT_EDGE(x))
-			_coll = BOTTOM_LEFT_CORNER;
-		else
-			_coll = BOTTOM_EDGE;
-	} else if (COLLIDE_RIGHT_EDGE(x)) {
-		_coll = RIGHT_EDGE;
-	} else if (COLLIDE_LEFT_EDGE(x)) {
-		_coll = LEFT_EDGE;
-	} else {
-		_coll = NOCOLLIDE;
-	}
+	SPECIFY_COLLIDE_TYPE(cd->x, cd->y);
 	return _coll;
 }
 
 obj_status_t create_background(matrix_t *matrix, background_t *background, pixel_t *floor_pixel, pixel_t *frame_pixel, size_t length, size_t width, const char *title)
 {
 	status_t _stat = OBJ_SUCCESS;
-	if ((length != 0) || (matrix->col < length))
+	if ((length == 0) || (matrix->col < length))
 		return _stat = OBJ_BADLENGTH;
-	if ((width != 0) || (matrix->row < width))
+	if ((width == 0) || (matrix->row < width))
 		return _stat = OBJ_BADWITDH;
 	object_t frame_obj = {
 		.shape = RECTANGLE,
@@ -58,14 +38,14 @@ obj_status_t create_background(matrix_t *matrix, background_t *background, pixel
 		.len = length,
 		.wid = width
 	};
-	if (mx_popup(matrix, &frame_obj, &background->frame, write_title) != SUCCESS)
+	if (mx_popup(matrix, &frame_obj, &background->frame) != SUCCESS)
 		return _stat = OBJ_FAILURE;
-	if (mx_popup(matrix, &floor_obj, &background->floor, NULL) != SUCCESS)
+	if (mx_popup(matrix, &floor_obj, &background->floor) != SUCCESS)
 		return _stat = OBJ_FAILURE;
 	strncpy(background->title, title, MAX_TITLE_SIZE);
 	background->edge.top_edge = background->floor->y;
-	background->edge.btm_edge = background->floor->y + background->floor->wid;
-	background->edge.rit_edge = background->floor->x + background->floor->len;
+	background->edge.btm_edge = background->floor->y + background->floor->wid - 1;
+	background->edge.rit_edge = background->floor->x + background->floor->len - 1;
 	background->edge.lft_edge = background->floor->x;
 	background->collide = collide;
 	return _stat;

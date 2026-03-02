@@ -6,11 +6,42 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#define COLLIDE_TOP_EDGE(y) (y == top_edge)
+#define COLLIDE_BOTTOM_EDGE(y) (y == bottom_edge)
+#define COLLIDE_RIGTH_EDGE(x) (x == right_edge)
+#define COLLIDE_LEFT_EDGE(x) (x == left_edge)
+
+#define SPECIFY_COLLIDE_TYPE(x, y)\
+	do {\
+		if (COLLIDE_TOP_EDGE(y)) {\
+			if (COLLIDE_RIGHT_EDGE(x))\
+				_coll = TOP_RIGHT_CORNER;\
+			else if (COLLIDE_LEFT_EDGE(x))\
+				_coll = TOP_LEFT_CORNER;\
+			else\
+				_coll = TOP_EDGE;\
+		} else if (COLLIDE_BOTTOM_EDGE(y)) {\
+			if (COLLIDE_RIGHT_EDGE(x))\
+				_coll = BOTTOM_RIGTH_CORNER;\
+			else if (COLLIDE_LEFT_EDGE(x))\
+				_coll = BOTTOM_LEFT_CORNER;\
+			else\
+				_coll = BOTTOM_EDGE;\
+		} else if (COLLIDE_RIGHT_EDGE(x)) {\
+			_coll = RIGHT_EDGE;\
+		} else if (COLLIDE_LEFT_EDGE(x)) {\
+			_coll = LEFT_EDGE;\
+		} else {\
+			_coll = NOCOLLIDE;\
+		}\
+	} while (0);
+
 typedef enum {
 	OBJ_SUCCESS,
 	OBJ_FAILURE,
 	OBJ_BADLENGTH,
-	OBJ_BADWIDTH
+	OBJ_BADWIDTH,
+	OBJ_BADCOORDINATE
 } obj_status_t;
 
 typedef enum {
@@ -24,6 +55,11 @@ typedef enum {
 	BOTTOM_RIGTH_CORNER,
 	BOTTOM_LEFT_CORNER
 } collide_t;
+
+typedef struct {
+	size_t x;
+	size_t y;
+} coordinate_t;
 
 typedef struct {
 	size_t top_edge;

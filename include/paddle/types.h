@@ -9,7 +9,7 @@ typedef struct paddle {
 	bool movable_lft;
 	void (*move_right)(struct paddle *pd);
 	void (*move_left)(struct paddle *pd);
-	collide_t (*collide)(struct paddle *pd, size_t x, size_t y);
+	collide_t (*collide)(struct paddle *pd, coordinate_t *cd);
 } paddle_t;
 
 #endif

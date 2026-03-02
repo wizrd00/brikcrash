@@ -2,7 +2,8 @@
 #define BRIKCRASH_BACKGROUND_H
 
 #include "background/types.h"
+#include <string.h>
 
-status_t create_background(background_t *back, pixel_t *floor, pixel_t frame, size_t length, size_t width, const char *title);
+obj_status_t create_background(matrix_t *matrix, background_t *background, pixel_t *floor_pixel, pixel_t *frame_pixel, size_t length, size_t width, const char *title);
 
 #endif

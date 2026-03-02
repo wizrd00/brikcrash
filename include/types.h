@@ -7,10 +7,22 @@
 #include <stdbool.h>
 
 typedef enum {
-	TOP,
-	BTM,
-	RIT,
-	LFT
+	OBJ_SUCCESS,
+	OBJ_FAILURE,
+	OBJ_BADLENGTH,
+	OBJ_BADWIDTH
+} obj_status_t;
+
+typedef enum {
+	NOCOLLIDE,
+	TOP_EDGE,
+	BOTTOM_EDGE,
+	RIGTH_EDGE,
+	LEFT_EDGE,
+	TOP_RIGTH_CORNER,
+	TOP_LEFT_CORNER,
+	BOTTOM_RIGTH_CORNER,
+	BOTTOM_LEFT_CORNER
 } collide_t;
 
 typedef struct {

@@ -8,7 +8,7 @@
 
 #define COLLIDE_TOP_EDGE(y) (y == top_edge)
 #define COLLIDE_BOTTOM_EDGE(y) (y == bottom_edge)
-#define COLLIDE_RIGTH_EDGE(x) (x == right_edge)
+#define COLLIDE_RIGHT_EDGE(x) (x == right_edge)
 #define COLLIDE_LEFT_EDGE(x) (x == left_edge)
 
 #define SPECIFY_COLLIDE_TYPE(x, y)\
@@ -22,7 +22,7 @@
 				_coll = TOP_EDGE;\
 		} else if (COLLIDE_BOTTOM_EDGE(y)) {\
 			if (COLLIDE_RIGHT_EDGE(x))\
-				_coll = BOTTOM_RIGTH_CORNER;\
+				_coll = BOTTOM_RIGHT_CORNER;\
 			else if (COLLIDE_LEFT_EDGE(x))\
 				_coll = BOTTOM_LEFT_CORNER;\
 			else\
@@ -39,20 +39,20 @@
 typedef enum {
 	OBJ_SUCCESS,
 	OBJ_FAILURE,
+	OBJ_BADCOORDINATE,
 	OBJ_BADLENGTH,
-	OBJ_BADWIDTH,
-	OBJ_BADCOORDINATE
+	OBJ_BADWIDTH
 } obj_status_t;
 
 typedef enum {
 	NOCOLLIDE,
 	TOP_EDGE,
 	BOTTOM_EDGE,
-	RIGTH_EDGE,
+	RIGHT_EDGE,
 	LEFT_EDGE,
-	TOP_RIGTH_CORNER,
+	TOP_RIGHT_CORNER,
 	TOP_LEFT_CORNER,
-	BOTTOM_RIGTH_CORNER,
+	BOTTOM_RIGHT_CORNER,
 	BOTTOM_LEFT_CORNER
 } collide_t;
 

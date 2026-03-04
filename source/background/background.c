@@ -14,13 +14,19 @@ static collide_t collide(struct background *bg, coordinate_t *cd)
 obj_status_t create_background(matrix_t *matrix, background_t *background, pixel_t *floor_pixel, pixel_t *frame_pixel, size_t length, size_t width, const char *title)
 {
 	status_t _stat = OBJ_SUCCESS;
-	if ((length == 0) || (matrix->col < length))
+	if ((length == 0) || (length > matrix->col))
 		return _stat = OBJ_BADLENGTH;
-	if ((width == 0) || (matrix->row < width))
-		return _stat = OBJ_BADWITDH;
+	if ((width == 0) || (width > matrix->row))
+		return _stat = OBJ_BADWIDTH;
+	size_t floor_x = CALC_FLOOR_X(matrix->col, length);
+	size_t floor_y = CALC_FLOOR_Y(matrix->row, width);
+	if (floor_x + length > matrix->col)
+		return _stat = OBJ_BADLENGTH;
+	if (floor_y + width > matrix->row)
+		return _stat = OBJ_BADWIDTH;
 	object_t frame_obj = {
 		.shape = RECTANGLE,
-		.pixel = *frame,
+		.pixel = *frame_pixel,
 		.active = true,
 		.fill = true,
 		.x = 0,
@@ -30,11 +36,11 @@ obj_status_t create_background(matrix_t *matrix, background_t *background, pixel
 	};
 	object_t floor_obj = {
 		.shape = RECTANGLE,
-		.pixel = *floor,
+		.pixel = *floor_pixel,
 		.active = true,
 		.fill = true,
-		.x = CALC_FLOOR_X(matrix->col, width),
-		.y = CALC_FLOOR_Y(matrix->row, length),
+		.x = floor_x,
+		.y = floor_y,
 		.len = length,
 		.wid = width
 	};

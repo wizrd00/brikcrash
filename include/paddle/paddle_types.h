@@ -5,6 +5,7 @@
 
 typedef struct paddle {
 	object_t *block;
+	edge_t edge;
 	bool movable_rit;
 	bool movable_lft;
 	void (*move_right)(struct paddle *pd);

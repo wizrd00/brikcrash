@@ -37,7 +37,7 @@ POINTER_SYM := "\e[91m->\e[0m"
 
 $(BRIKCRASH) : $(BIN_DIR) $(OBJ_FILES) $(HDR_FILES)
 	@/usr/bin/echo -e $(POINTER_SYM) "\e[96mlinking modules into" $@ "\e[0m"
-	$(CC) $(CFLAGS) $(CFLAGS_PIC) -o $@ $(OBJ_FILES) $(LIBCRC)
+	$(CC) $(CFLAGS) $(LIB_FLAGS) -o $@ $(OBJ_FILES)
 	@/usr/bin/echo -e $(POINTER_SYM) "\e[93mstrip" $@ "\e[0m"
 	@strip $@
 
@@ -50,7 +50,7 @@ $(BIN_DIR) :
 
 $(BIN_DIR)/%.o : $(SRC_DIR)/%.c $(INC_DIR)/%.h
 	@/usr/bin/echo -e $(POINTER_SYM) "\e[93mcompiling module" $< "\e[0m"
-	$(CC) -c $(CFLAGS) $(CFLAGS_PIC) $(INCLUDE_FLAGS) -o $@ $<
+	$(CC) -c $(CFLAGS) $(LIB_FLAGS) $(INCLUDE_FLAGS) -o $@ $<
 
 clean :
 	rm $(wildcard $(BIN_DIR)/*.o) $(wildcard $(BRIKCRASH))

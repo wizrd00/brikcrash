@@ -3,26 +3,25 @@
 
 #include "types.h"
 
-typedef struct {
-	size_t x;
-	size_t y;
-	enum {
-		UP_RIGHT_STEEP,
-		UP_RIGHT_SHALLOW,
-		UP_LEFT_STEEP,
-		UP_LEFT_SHALLOW,
-		DOWN_RIGHT_STEEP,
-		DOWN_RIGHT_SHALLOW,
-		DOWN_LEFT_STEEP,
-		DOWN_LEFT_SHALLOW
-	} type;
+#define FIRST_VECTOR DOWN_RIGHT_STEEP
+
+typedef enum {
+	UP_RIGHT_STEEP,
+	UP_RIGHT_SHALLOW,
+	UP_LEFT_STEEP,
+	UP_LEFT_SHALLOW,
+	DOWN_RIGHT_STEEP,
+	DOWN_RIGHT_SHALLOW,
+	DOWN_LEFT_STEEP,
+	DOWN_LEFT_SHALLOW
 } vector_t;
 
 typedef struct ball {
 	object_t *block;
 	vector_t vector;
+	coordinate_t (*get_coordinate)(struct ball *bl);
 	void (*apply_next_move)(struct ball *bl);
-	void (*apply_prev_move)(struct ball *bl);
+	void (*swap_vector)(struct ball *bl);
 } ball_t;
 
 #endif

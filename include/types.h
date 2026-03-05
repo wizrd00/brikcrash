@@ -6,6 +6,15 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#define ERROR_MSG "[!] Error\n\tstatus code : %d\n\tfunction : %s\n\tmessage : %s\n\n"
+#define FRAME_TITLE "BRIKCRASH"
+#define BRICK_ROW_COUNT 6
+#define BRICK_COL_COUNT 16
+#define BRICK_SIZE 4
+#define PADDLE_SIZE 8
+#define FLOOR_LENGTH (BRICK_COL_COUNT * BRICK_SIZE)
+#define FLOOR_WIDTH 25
+
 #define COLLIDE_TOP_EDGE(y) (y == top_edge)
 #define COLLIDE_BOTTOM_EDGE(y) (y == bottom_edge)
 #define COLLIDE_RIGHT_EDGE(x) (x == right_edge)
@@ -67,5 +76,13 @@ typedef struct {
 	size_t rit_edge;
 	size_t lft_edge;
 } edge_t;
+
+typedef struct {
+	matrix_t mx;
+	background_t bg;
+	brick_t bk[BRICK_ROW_COUNT][BRICK_COL_COUNT];
+	paddle_t pd;
+	ball_t bl;
+} context_t;
 
 #endif

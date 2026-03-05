@@ -1,5 +1,11 @@
 #include "brick/brick.h"
 
+static void remove(struct brick *bk)
+{
+	bk->block->active = false;
+	return;
+}
+
 static collide_t collide(struct brick *bk, coordinate_t *cd)
 {
 	collide_t _coll;

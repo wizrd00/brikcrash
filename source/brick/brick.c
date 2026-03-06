@@ -1,6 +1,6 @@
 #include "brick/brick.h"
 
-static void remove(struct brick *bk)
+static void disappear(struct brick *bk)
 {
 	bk->block->active = false;
 	return;
@@ -29,7 +29,7 @@ obj_status_t create_brick(matrix_t *matrix, brick_t *brick, pixel_t *pixel, coor
 	obj_status_t _stat = OBJ_SUCCESS;
 	if ((coordinate->x >= matrix->col) || (coordinate->y >= matrix->row))
 		return _stat = OBJ_BADCOORDINATE;
-	if ((length == 0) || (length + coordinate->x >= matrix->col))
+	if ((length == 0) || (length + coordinate->x > matrix->col))
 		return _stat = OBJ_BADLENGTH;
 	object_t brick_obj = {
 		.shape = RECTANGLE,
@@ -47,6 +47,7 @@ obj_status_t create_brick(matrix_t *matrix, brick_t *brick, pixel_t *pixel, coor
 	brick->edge.btm_edge = brick->block->y + brick->block->wid - 1;
 	brick->edge.rit_edge = brick->block->x + brick->block->len - 1;
 	brick->edge.lft_edge = brick->block->x;
+	brick->disappear = disappear;
 	brick->collide = collide;
 	return _stat;
 }

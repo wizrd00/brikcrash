@@ -6,7 +6,7 @@
 typedef struct brick {
 	object_t *block;
 	edge_t edge;
-	void (*remove)(struct brick *bk);
+	void (*disappear)(struct brick *bk);
 	collide_t (*collide)(struct brick *bk, coordinate_t *cd);
 } brick_t;
 

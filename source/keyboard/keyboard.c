@@ -1,14 +1,16 @@
 #include "keyboard/keyboard.h"
 
+static bool is_available(int timeout)
+{
+	struct pollfd pfd = {.fd = fileno(stdin), .events = POLLIN};
+	return ((poll(&pfd, 1, timeout) > 0) && (pfd.revents & POLLIN > 0)) ? true : false;
+}
+
 static void get_special_key(keyboard_t *key)
 {
-	char keychar;
-	if (!IS_AVAILABLE()) {
-		*key = KEY_ESC;
-		return;
-	}
+	unsigned char keychar;
 	if (mx_readkey(&keychar, 0) != SUCCESS) {
-		*key = KEY_NONE;
+		*key = KEY_ESC;
 		return;
 	}
 	if (keychar != SPECIAL_CHAR) {
@@ -41,13 +43,8 @@ static void get_special_key(keyboard_t *key)
 keyboard_t getkey(void)
 {
 	keyboard_t key;
-	char keychar;
-	struct poll pfd = {.fd = fileno(stdin), events = POLLIN};
-	if (!IS_AVAILBLE()) {
-		FLUSH();
-		return key = KEY_NONE;
-	}
-	if (pfd.revents & POLLIN == 0) {
+	unsigned char keychar;
+	if (!is_available(POLL_TIMEOUT)) {
 		FLUSH();
 		return key = KEY_NONE;
 	}

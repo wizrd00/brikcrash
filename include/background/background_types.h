@@ -5,9 +5,9 @@
 
 #define MAX_TITLE_SIZE 64
 
-#define CALC_FLOOR_X(matrix_wid, floor_wid) ((matrix_wid - floor_wid) / 2)
+#define CALC_FLOOR_X(matrix_col, floor_len) ((matrix_col - floor_len) / (size_t) 2)
 
-#define CALC_FLOOR_Y(matrix_len, floor_len) ((matrix_len - floor_len) / 2)
+#define CALC_FLOOR_Y(matrix_row, floor_wid) ((matrix_row - floor_wid) / (size_t) 2)
 
 typedef struct background {
 	object_t *floor;

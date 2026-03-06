@@ -5,15 +5,21 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <errno.h>
 
-#define ERROR_MSG "[!] Error\n\tstatus code : %d\n\tfunction : %s\n\tmessage : %s\n\n"
+#define ERROR_MSG "[!] Error -> (status code : %d) | (function : %s) | (message : %s)\n"
 #define FRAME_TITLE "BRIKCRASH"
+#define COEFFICIENT 20
+#define FRAME_INTERVAL 100000000
+#define FRAME_MINI_INTERVAL (FRAME_INTERVAL / COEFFICIENT)
+#define GAP_LENGTH 4
 #define BRICK_ROW_COUNT 6
-#define BRICK_COL_COUNT 16
+#define BRICK_COL_COUNT 24
 #define BRICK_SIZE 4
 #define PADDLE_SIZE 8
+#define BALL_SIZE 2
 #define FLOOR_LENGTH (BRICK_COL_COUNT * BRICK_SIZE)
-#define FLOOR_WIDTH 25
+#define FLOOR_WIDTH 24
 
 #define COLLIDE_TOP_EDGE(y) (y == top_edge)
 #define COLLIDE_BOTTOM_EDGE(y) (y == bottom_edge)
@@ -76,13 +82,5 @@ typedef struct {
 	size_t rit_edge;
 	size_t lft_edge;
 } edge_t;
-
-typedef struct {
-	matrix_t mx;
-	background_t bg;
-	brick_t bk[BRICK_ROW_COUNT][BRICK_COL_COUNT];
-	paddle_t pd;
-	ball_t bl;
-} context_t;
 
 #endif

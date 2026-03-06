@@ -1,6 +1,10 @@
 #ifndef BRIKCRASH_KEYBOARD_TYPES_H
 #define BRIKCRASH_KEYBOARD_TYPES_H
 
+#include "types.h"
+#include <stdio.h>
+
+#define POLL_TIMEOUT 1
 #define ESC_CHAR '\x1b'
 #define ENTER_CHAR '\n'
 #define SPACE_CHAR ' '
@@ -10,8 +14,7 @@
 #define ARROW_RIGHT_SPECIAL_CHAR 'C'
 #define ARROW_LEFT_SPECIAL_CHAR 'D'
 
-#define IS_AVAILABLE() (poll(&pfd, 1, 0) > 0)
-#define FLUSH() (while (IS_AVAILABLE()) getchar();)
+#define FLUSH() while (is_available(0)) getchar()
 
 typedef enum {
 	KEY_NONE,

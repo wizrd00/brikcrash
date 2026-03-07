@@ -5,12 +5,16 @@ static keyboard_t key;
 
 void create_context(void)
 {
+	status_t _stat;
 	struct winsize ws;
 	if (ioctl(fileno(stdout), TIOCGWINSZ, &ws) != 0)
 		TRYCALL((errno > 0) ? -errno : errno, strerror(errno));
 	cx.mx.row = (size_t) ws.ws_row;
 	cx.mx.col = (size_t) ws.ws_col;
-	TRYCALL(mx_init(&cx.mx, true, true), "failed to init terrenity");
+	if (_stat = mx_init(&cx.mx, true, true)) {
+		fprintf(stderr, ERROR_MSG, _stat, __func__, "failed to init terrenity");
+		exit(EXIT_FAILURE);
+	}
 	return;
 }
 
@@ -52,6 +56,7 @@ void modify_paddle(void)
 	coordinate_t cd = {.x = 0, .y = cx.pd.edge.top_edge};
 	switch (key) {
 	case KEY_ARROW_RIGHT :
+		printf("r\n");
 		cd.x = cx.pd.edge.rit_edge;
 		if (cx.bg.collide(&cx.bg, &cd) != BOTTOM_RIGHT_CORNER)
 			cx.pd.move_right(&cx.pd);
@@ -59,6 +64,7 @@ void modify_paddle(void)
 			cx.pd.move_right(&cx.pd);
 		break;
 	case KEY_ARROW_LEFT :
+		printf("l\n");
 		cd.x = cx.pd.edge.lft_edge;
 		if (cx.bg.collide(&cx.bg, &cd) != BOTTOM_LEFT_CORNER)
 			cx.pd.move_left(&cx.pd);

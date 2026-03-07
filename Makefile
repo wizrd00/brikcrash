@@ -21,7 +21,7 @@ ifeq ($(CC), pcc)
 CFLAGS := -std=c99 -O3 -Wc,-Werror=implicit-function-declaration,-Werror=missing-prototypes,-Werror=pointer-sign,-Werror=sign-compare,-Werror=strict-prototypes,-Werror=shadow
 LIB_FLAGS := -Wl,--library-path=$(LIB_DIR),--library=$(TERRENITY),-rpath=$(LIB_DIR)
 else ifeq ($(CC), gcc)
-CFLAGS := -std=gnu99 -O3 -Wall -Wextra -Wpedantic -Wstrict-aliasing -Wcast-align -Wconversion -Wsign-conversion -Wshadow -Wswitch-enum
+CFLAGS := -std=gnu99 -O3 -Wall -Wextra -Wpedantic -Wstrict-aliasing -Wcast-align -Wconversion -Wsign-conversion -Wshadow -Wno-switch
 LIB_FLAGS := -L$(LIB_DIR) -l$(TERRENITY) -Wl,-rpath=$(LIB_DIR)
 else
 $(error unsupported compiler : $(CC))
@@ -37,7 +37,7 @@ POINTER_SYM := "\e[91m->\e[0m"
 
 $(BRIKCRASH) : $(BIN_DIR) $(OBJ_FILES) $(HDR_FILES)
 	@/usr/bin/echo -e $(POINTER_SYM) "\e[96mlinking modules into" $@ "\e[0m"
-	$(CC) $(CFLAGS) $(LIB_FLAGS) -o $@ $(OBJ_FILES)
+	$(CC) $(CFLAGS) -o $@ $(OBJ_FILES) $(LIB_FLAGS)
 	@/usr/bin/echo -e $(POINTER_SYM) "\e[93mstrip" $@ "\e[0m"
 	@strip $@
 

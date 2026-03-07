@@ -3,7 +3,7 @@
 static bool is_available(int timeout)
 {
 	struct pollfd pfd = {.fd = fileno(stdin), .events = POLLIN};
-	return ((poll(&pfd, 1, timeout) > 0) && (pfd.revents & POLLIN > 0)) ? true : false;
+	return ((poll(&pfd, 1, timeout) > 0) && ((pfd.revents & POLLIN) > 0)) ? true : false;
 }
 
 static void get_special_key(keyboard_t *key)
@@ -43,12 +43,11 @@ static void get_special_key(keyboard_t *key)
 keyboard_t getkey(void)
 {
 	keyboard_t key;
+	status_t _stat;
 	unsigned char keychar;
-	if (!is_available(POLL_TIMEOUT)) {
-		FLUSH();
+	if (!is_available(POLL_TIMEOUT))
 		return key = KEY_NONE;
-	}
-	if (mx_readkey(&keychar, 0) != SUCCESS) {
+	if ((_stat = mx_readkey(&keychar, 0)) != SUCCESS) {
 		FLUSH();
 		return key = KEY_NONE;
 	}

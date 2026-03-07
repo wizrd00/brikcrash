@@ -20,7 +20,7 @@ static collide_t collide(struct background *bg, coordinate_t *cd)
 
 obj_status_t create_background(matrix_t *matrix, background_t *background, pixel_t *floor_pixel, pixel_t *frame_pixel, size_t length, size_t width, const char *title)
 {
-	status_t _stat = OBJ_SUCCESS;
+	obj_status_t _stat = OBJ_SUCCESS;
 	if ((length == 0) || (length > matrix->col))
 		return _stat = OBJ_BADLENGTH;
 	if ((width == 0) || (width > matrix->row))

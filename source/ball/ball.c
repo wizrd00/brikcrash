@@ -50,6 +50,7 @@ static void apply_next_move(struct ball *bl)
 	case DOWN_LEFT_STEEP :
 		bl->block->x -= (bl->block->x > 0) ? 1 : 0;
 		bl->block->y++;
+		break;
 	case DOWN_LEFT_SHALLOW :
 		bl->block->x -= (bl->block->x > 1) ? 2 : (bl->block->x > 0) ? 1 : 0;
 		bl->block->y++;

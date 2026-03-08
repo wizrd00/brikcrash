@@ -11,7 +11,7 @@ ifeq ($(LIBC), musl)
 BRIKCRASH := brikcrash-musl.bin
 TERRENITY := terrenity-musl
 else ifeq ($(LIBC), glibc)
-BRIKCRASH := brickcrash-glibc.bin
+BRIKCRASH := brikcrash-glibc.bin
 TERRENITY := terrenity-glibc
 else
 $(error unsupported libc : $(LIBC))

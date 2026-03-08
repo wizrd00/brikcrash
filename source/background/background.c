@@ -3,10 +3,10 @@
 static collide_t collide(struct background *bg, coordinate_t *cd)
 {
 	collide_t _coll;
-	size_t top_edge = bg->edge.top_edge + 1;
-	size_t bottom_edge = bg->edge.btm_edge - 1;
-	size_t right_edge = bg->edge.rit_edge - 1;
-	size_t left_edge = bg->edge.lft_edge + 1;
+	size_t top_edge = bg->edge.top_edge;
+	size_t bottom_edge = bg->edge.btm_edge;
+	size_t right_edge = bg->edge.rit_edge;
+	size_t left_edge = bg->edge.lft_edge;
 	SPECIFY_BACKGROUND_COLLIDE_TYPE(cd->x, cd->y);
 	if (_coll != NOCOLLIDE)
 		return _coll;

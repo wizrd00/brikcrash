@@ -11,8 +11,10 @@
 				return _coll = TOP_RIGHT_CORNER;\
 			else if (COLLIDE_LEFT_EDGE(x))\
 				return _coll = TOP_LEFT_CORNER;\
-			else\
+			else if (COLLIDE_BETWEEN_EDGES(x))\
 				return _coll = TOP_EDGE;\
+			else\
+				return _coll = NOCOLLIDE;\
 		} else {\
 			return _coll = NOCOLLIDE;\
 		}\

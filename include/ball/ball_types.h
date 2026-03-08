@@ -3,7 +3,7 @@
 
 #include "types.h"
 
-#define FIRST_VECTOR DOWN_RIGHT_STEEP
+#define FIRST_VECTOR UP_RIGHT_SHALLOW
 
 typedef enum {
 	UP_RIGHT_STEEP,

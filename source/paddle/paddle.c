@@ -21,14 +21,12 @@ static collide_t collide(struct paddle *pd, coordinate_t *cd)
 
 	collide_t _coll;
 	size_t top_edge = (pd->edge.top_edge != 0) ? pd->edge.top_edge - 1 : pd->edge.top_edge;
-	size_t bottom_edge = pd->edge.btm_edge + 1;
-	size_t right_edge = pd->edge.rit_edge + 1;
-	size_t left_edge = (pd->edge.lft_edge != 0) ? pd->edge.lft_edge - 1 : pd->edge.lft_edge;
+	size_t right_edge = pd->edge.rit_edge;
+	size_t left_edge = pd->edge.lft_edge;
 	SPECIFY_PADDLE_COLLIDE_TYPE(cd->x, cd->y);
 	if (_coll != NOCOLLIDE)
 		return _coll;
 	top_edge++;
-	bottom_edge--;
 	right_edge--;
 	left_edge++;
 	SPECIFY_PADDLE_COLLIDE_TYPE(cd->x, cd->y);

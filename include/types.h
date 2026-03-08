@@ -9,13 +9,13 @@
 
 #define ERROR_MSG "[!] Error -> (status code : %d) | (function : %s) | (message : %s)\n"
 #define FRAME_TITLE "BRIKCRASH"
-#define COEFFICIENT 20
-#define FRAME_INTERVAL 100000000
+#define COEFFICIENT 25
+#define FRAME_INTERVAL 10000000
 #define FRAME_MINI_INTERVAL (FRAME_INTERVAL / COEFFICIENT)
 #define GAP_LENGTH 4
 #define BRICK_ROW_COUNT 6
-#define BRICK_COL_COUNT 24
-#define BRICK_SIZE 4
+#define BRICK_COL_COUNT 12
+#define BRICK_SIZE 8
 #define PADDLE_SIZE 8
 #define BALL_SIZE 2
 #define FLOOR_LENGTH (BRICK_COL_COUNT * BRICK_SIZE)
@@ -25,6 +25,7 @@
 #define COLLIDE_BOTTOM_EDGE(y) (y == bottom_edge)
 #define COLLIDE_RIGHT_EDGE(x) (x == right_edge)
 #define COLLIDE_LEFT_EDGE(x) (x == left_edge)
+#define COLLIDE_BETWEEN_EDGES(x) ((x > left_edge) && (x < right_edge))
 
 typedef enum {
 	OBJ_SUCCESS,

@@ -3,10 +3,258 @@
 static context_t cx;
 static keyboard_t key;
 
+static void game_over(void)
+{
+	//TODO
+	deinit();
+	exit(EXIT_SUCCESS);
+	return;
+}
+
+static void paddle_collide_top_right_corner(void)
+{
+	switch (cx.bl.vector) {
+	case DOWN_RIGHT_STEEP :
+		cx.bl.vector = UP_LEFT_STEEP;
+		break;
+	case DOWN_RIGHT_SHALLOW :
+		cx.bl.vector = UP_LEFT_SHALLOW;
+		break;
+	case DOWN_LEFT_STEEP :
+		cx.bl.vector = UP_LEFT_SHALLOW;
+		break;
+	case DOWN_LEFT_SHALLOW :
+		cx.bl.vector = UP_LEFT_SHALLOW;
+		break;
+	}
+	return;
+}
+
+static void paddle_collide_top_left_corner(void)
+{
+	switch (cx.bl.vector) {
+	case DOWN_RIGHT_STEEP :
+		cx.bl.vector = UP_RIGHT_SHALLOW;
+		break;
+	case DOWN_RIGHT_SHALLOW :
+		cx.bl.vector = UP_RIGHT_SHALLOW;
+		break;
+	case DOWN_LEFT_STEEP :
+		cx.bl.vector = UP_RIGHT_STEEP;
+		break;
+	case DOWN_LEFT_SHALLOW :
+		cx.bl.vector = UP_RIGHT_SHALLOW;
+		break;
+	}
+	return;
+}
+
+static void brick_collide_top_edge(void)
+{
+	switch (cx.bl.vector) {
+	case UP_RIGHT_STEEP :
+		cx.bl.vector = DOWN_RIGHT_STEEP;
+		break;
+	case UP_RIGHT_SHALLOW :
+		cx.bl.vector = DOWN_RIGHT_SHALLOW;
+		break;
+	case UP_LEFT_STEEP :
+		cx.bl.vector = DOWN_LEFT_STEEP;
+		break;
+	case UP_LEFT_SHALLOW :
+		cx.bl.vector = DOWN_LEFT_SHALLOW;
+		break;
+	case DOWN_RIGHT_STEEP :
+		cx.bl.vector = UP_RIGHT_STEEP;
+		break;
+	case DOWN_RIGHT_SHALLOW :
+		cx.bl.vector = UP_RIGHT_SHALLOW;
+		break;
+	case DOWN_LEFT_STEEP :
+		cx.bl.vector = UP_LEFT_STEEP;
+		break;
+	case DOWN_LEFT_SHALLOW :
+		cx.bl.vector = UP_LEFT_SHALLOW;
+		break;
+	}
+	return;
+}
+
+static void brick_collide_top_right_corner(void)
+{
+	switch (cx.bl.vector) {
+	case UP_RIGHT_STEEP :
+		cx.bl.vector = DOWN_RIGHT_STEEP;
+		break;
+	case UP_RIGHT_SHALLOW :
+		cx.bl.vector = DOWN_RIGHT_SHALLOW;
+		break;
+	case UP_LEFT_STEEP :
+		cx.bl.vector = DOWN_RIGHT_STEEP;
+		break;
+	case UP_LEFT_SHALLOW :
+		cx.bl.vector = DOWN_RIGHT_SHALLOW;
+		break;
+	case DOWN_RIGHT_STEEP :
+		cx.bl.vector = UP_RIGHT_STEEP;
+		break;
+	case DOWN_RIGHT_SHALLOW :
+		cx.bl.vector = UP_RIGHT_SHALLOW;
+		break;
+	case DOWN_LEFT_STEEP :
+		cx.bl.vector = UP_RIGHT_STEEP;
+		break;
+	case DOWN_LEFT_SHALLOW :
+		cx.bl.vector = UP_RIGHT_SHALLOW;
+		break;
+	}
+	return;
+}
+
+static void brick_collide_top_left_corner(void)
+{
+	switch (cx.bl.vector) {
+	case UP_RIGHT_STEEP :
+		cx.bl.vector = DOWN_LEFT_STEEP;
+		break;
+	case UP_RIGHT_SHALLOW :
+		cx.bl.vector = DOWN_LEFT_SHALLOW;
+		break;
+	case UP_LEFT_STEEP :
+		cx.bl.vector = DOWN_LEFT_STEEP;
+		break;
+	case UP_LEFT_SHALLOW :
+		cx.bl.vector = DOWN_LEFT_SHALLOW;
+		break;
+	case DOWN_RIGHT_STEEP :
+		cx.bl.vector = UP_RIGHT_STEEP;
+		break;
+	case DOWN_RIGHT_SHALLOW :
+		cx.bl.vector = UP_RIGHT_SHALLOW;
+		break;
+	case DOWN_LEFT_STEEP :
+		cx.bl.vector = UP_LEFT_STEEP;
+		break;
+	case DOWN_LEFT_SHALLOW :
+		cx.bl.vector = UP_LEFT_SHALLOW;
+		break;
+	}
+	return;
+}
+
+static void frame_collide_top_edge(void)
+{
+	cx.bl.swap_vector(&cx.bl);
+	return;
+}
+
+static void frame_collide_bottom_edge(void)
+{
+	cx.bl.swap_vector(&cx.bl);
+	return;
+}
+
+static void frame_collide_right_edge(void)
+{
+	switch (cx.bl.vector) {
+	case UP_RIGHT_STEEP :
+		cx.bl.vector = UP_LEFT_STEEP;
+		break;
+	case UP_RIGHT_SHALLOW :
+		cx.bl.vector = UP_LEFT_SHALLOW;
+		break;
+	case DOWN_RIGHT_STEEP :
+		cx.bl.vector = DOWN_LEFT_STEEP;
+		break;
+	case DOWN_RIGHT_SHALLOW :
+		cx.bl.vector = DOWN_LEFT_SHALLOW;
+		break;
+	}
+	return;
+}
+
+static void frame_collide_left_edge(void)
+{
+	switch (cx.bl.vector) {
+	case UP_LEFT_STEEP :
+		cx.bl.vector = UP_RIGHT_STEEP;
+		break;
+	case UP_LEFT_SHALLOW :
+		cx.bl.vector = UP_RIGHT_SHALLOW;
+		break;
+	case DOWN_LEFT_STEEP :
+		cx.bl.vector = DOWN_RIGHT_STEEP;
+		break;
+	case DOWN_LEFT_SHALLOW :
+		cx.bl.vector = DOWN_RIGHT_SHALLOW;
+		break;
+	}
+	return;
+}
+
+static void frame_collide_top_right_corner(void)
+{
+	switch (cx.bl.vector) {
+	case UP_RIGHT_STEEP :
+		cx.bl.vector = DOWN_LEFT_STEEP;
+		break;
+	case UP_RIGHT_SHALLOW :
+		cx.bl.vector = DOWN_LEFT_SHALLOW;
+		break;
+	}
+	return;
+}
+
+static void frame_collide_top_left_corner(void)
+{
+	switch (cx.bl.vector) {
+	case UP_LEFT_STEEP :
+		cx.bl.vector = DOWN_RIGHT_STEEP;
+		break;
+	case UP_LEFT_SHALLOW :
+		cx.bl.vector - DOWN_RIGHT_SHALLOW;
+		break;
+	}
+	return;
+}
+
+static void frame_collide_bottom_right_corner(void)
+{
+	switch (cx.bl.vector) {
+	case DOWN_RIGHT_STEEP :
+		cx.bl.vector = UP_LEFT_STEEP;
+		break;
+	case DOWN_RIGHT_SHALLOW :
+		cx.bl.vector = UP_LEFT_SHALLOW;
+		break;
+	}
+	return;
+}
+
+static void frame_collide_bottom_left_corner(void)
+{
+	switch (cx.bl.vector) {
+	case DOWN_LEFT_STEEP :
+		cx.bl.vector = UP_RIGHT_STEEP;
+		break;
+	case DOWN_LEFT_SHALLOW :
+		cx.bl.vector = UP_RIGHT_SHALLOW;
+		break;
+	}
+	return;
+}
+
 static bool check_paddle_collide(coordinate_t *cd)
 {
-	if (cx.pd.collide(&cx.pd, cd) != NOCOLLIDE) {
+	switch (cx.pd.collide(&cx.pd, cd)) {
+	case TOP_EDGE :
 		cx.bl.swap_vector(&cx.bl);
+		return true;
+	case TOP_RIGHT_CORNER :
+		paddle_collide_top_right_corner();
+		return true;
+	case TOP_LEFT_CORNER :
+		paddle_collide_top_left_corner();
 		return true;
 	}
 	return false;
@@ -16,18 +264,51 @@ static bool check_bricks_collide(coordinate_t *cd)
 {
 	for (size_t i = 0; i < BRICK_ROW_COUNT; i++)
 		for (size_t j = 0; j < BRICK_COL_COUNT; j++)
-			if ((cx.bk[i][j].is_active(&cx.bk[i][j])) && (cx.bk[i][j].collide(&cx.bk[i][j], cd) != NOCOLLIDE)) {
-				cx.bk[i][j].disappear(&cx.bk[i][j]);
-				cx.bl.swap_vector(&cx.bl);
-				return true;
+			if (BRICK(i, j).is_active(&BRICK(i, j))) {
+				switch (BRICK(i, j).collide(&BRICK(i, j), cd)) {
+				case TOP_EDGE :
+					brick_collide_top_edge();
+					BRICK(i, j).disappear(&BRICK(i, j));
+					return true;
+				case TOP_RIGHT_CORNER :
+					brick_collide_top_right_corner();
+					BRICK(i, j).disappear(&BRICK(i, j));
+					return true;
+				case TOP_LEFT_CORNER :
+					brick_collide_top_left_corner();
+					BRICK(i, j).disappear(&BRICK(i, j));
+					return true;
+				}
 			}
 	return false;
 }
 
 static bool check_frame_collide(coordinate_t *cd)
 {
-	if (cx.bg.collide(&cx.bg, cd) != NOCOLLIDE) {
-		cx.bl.swap_vector(&cx.bl);
+	switch (cx.bg.collide(&cx.bg, cd)) {
+	case TOP_EDGE :
+		frame_collide_top_edge();
+		return true;
+	case BOTTOM_EDGE :
+		game_over();
+		return true;
+	case RIGHT_EDGE :
+		frame_collide_right_edge();
+		return true;
+	case LEFT_EDGE :
+		frame_collide_left_edge();
+		return true;
+	case TOP_RIGHT_CORNER :
+		frame_collide_top_right_corner();
+		return true;
+	case TOP_LEFT_CORNER :
+		frame_collide_top_left_corner();
+		return true;
+	case BOTTOM_RIGHT_CORNER :
+		game_over();
+		return true;
+	case BOTTOM_LEFT_CORNER :
+		game_over();
 		return true;
 	}
 	return false;

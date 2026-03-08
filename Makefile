@@ -28,7 +28,7 @@ $(error unsupported compiler : $(CC))
 endif
 
 SRC_FILES := $(wildcard $(SRC_DIR)/*.c) $(wildcard $(SRC_DIR)/background/*.c) $(wildcard $(SRC_DIR)/brick/*.c) $(wildcard $(SRC_DIR)/paddle/*.c) $(wildcard $(SRC_DIR)/ball/*.c) $(wildcard $(SRC_DIR)/keyboard/*.c)
-HDR_FILES := $(wildcard $(SRC_DIR)/background/*.h) $(wildcard $(SRC_DIR)/brick/*.h) $(wildcard $(SRC_DIR)/paddle/*.h) $(wildcard $(SRC_DIR)/ball/*.h)
+HDR_FILES := $(wildcard $(INC_DIR)/*.h) $(wildcard $(INC_DIR)/background/*.h) $(wildcard $(INC_DIR)/brick/*.h) $(wildcard $(INC_DIR)/paddle/*.h) $(wildcard $(INC_DIR)/ball/*.h)
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(BIN_DIR)/%.o, $(SRC_FILES))
 
 INCLUDE_FLAGS := -I$(INC_DIR)

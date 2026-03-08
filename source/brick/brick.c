@@ -14,17 +14,10 @@ static bool is_active(struct brick *bk)
 static collide_t collide(struct brick *bk, coordinate_t *cd)
 {
 	collide_t _coll;
-	size_t top_edge = (bk->edge.top_edge != 0) ? bk->edge.top_edge - 1 : bk->edge.top_edge;
-	size_t bottom_edge = bk->edge.btm_edge + 1;
-	size_t right_edge = bk->edge.rit_edge + 1;
-	size_t left_edge = (bk->edge.lft_edge != 0) ? bk->edge.lft_edge - 1 : bk->edge.lft_edge;
-	SPECIFY_BRICK_COLLIDE_TYPE(cd->x, cd->y);
-	if (_coll != NOCOLLIDE)
-		return _coll;
-	top_edge++;
-	bottom_edge--;
-	right_edge--;
-	left_edge++;
+	size_t top_edge = bk->edge.top_edge;
+	size_t bottom_edge = bk->edge.btm_edge;
+	size_t right_edge = bk->edge.rit_edge;
+	size_t left_edge = bk->edge.lft_edge;
 	SPECIFY_BRICK_COLLIDE_TYPE(cd->x, cd->y);
 	return _coll;
 }

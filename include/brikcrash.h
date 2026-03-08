@@ -16,6 +16,8 @@
 
 #define WAIT_MINI_INTERVAL() nanosleep(&(struct timespec){.tv_sec = 0, .tv_nsec = FRAME_MINI_INTERVAL}, NULL);
 
+#define BRICK(i, j) (cx.bk[i][j])
+
 #define BLANK_PIXEL() {.ulbd = NONE, .bgnd = LBGBLACK, .fgnd = LBGBLACK, .cval = ' '}
 
 #define FLOOR_PIXEL() {.ulbd = NONE, .bgnd = LBGBLACK, .fgnd = LFGBLACK, .cval = ' '}
@@ -24,7 +26,7 @@
 
 #define PADDLE_PIXEL() {.ulbd = NONE, .bgnd = HBGBLUE, .fgnd = HFGBLUE, .cval = ' '}
 
-#define BALL_PIXEL() {.ulbd = NONE, .bgnd = HBGBLUE, .fgnd = HFGBLUE, .cval = ' '}
+#define BALL_PIXEL() {.ulbd = NONE, .bgnd = HBGCYAN, .fgnd = HFGCYAN, .cval = ' '}
 
 #define BRICK_RED_PIXEL() {.ulbd = NONE, .bgnd = LBGRED, .fgnd = LFGBLACK, .cval = ' '}
 

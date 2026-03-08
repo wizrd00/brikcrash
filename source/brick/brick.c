@@ -15,7 +15,6 @@ static collide_t collide(struct brick *bk, coordinate_t *cd)
 {
 	collide_t _coll;
 	size_t top_edge = bk->edge.top_edge;
-	size_t bottom_edge = bk->edge.btm_edge;
 	size_t right_edge = bk->edge.rit_edge;
 	size_t left_edge = bk->edge.lft_edge;
 	SPECIFY_BRICK_COLLIDE_TYPE(cd->x, cd->y);

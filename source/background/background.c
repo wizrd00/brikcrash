@@ -55,7 +55,7 @@ obj_status_t create_background(matrix_t *matrix, background_t *background, pixel
 		return _stat = OBJ_FAILURE;
 	if (mx_popup(matrix, &floor_obj, &background->floor) != SUCCESS)
 		return _stat = OBJ_FAILURE;
-	strncpy(background->title, title, MAX_TITLE_SIZE);
+	strncpy(background->title, title, MAX_TITLE_SIZE - 1);
 	background->edge.top_edge = background->floor->y;
 	background->edge.btm_edge = background->floor->y + background->floor->wid - 1;
 	background->edge.rit_edge = background->floor->x + background->floor->len - 1;

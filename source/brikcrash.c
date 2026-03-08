@@ -212,7 +212,7 @@ static void frame_collide_top_left_corner(void)
 		cx.bl.vector = DOWN_RIGHT_STEEP;
 		break;
 	case UP_LEFT_SHALLOW :
-		cx.bl.vector - DOWN_RIGHT_SHALLOW;
+		cx.bl.vector = DOWN_RIGHT_SHALLOW;
 		break;
 	}
 	return;
@@ -322,7 +322,7 @@ void create_context(void)
 		TRYCALL((errno > 0) ? -errno : errno, strerror(errno));
 	cx.mx.row = (size_t) ws.ws_row;
 	cx.mx.col = (size_t) ws.ws_col;
-	if (_stat = mx_init(&cx.mx, true, true)) {
+	if ((_stat = mx_init(&cx.mx, true, true)) != SUCCESS) {
 		fprintf(stderr, ERROR_MSG, _stat, __func__, "failed to init terrenity");
 		exit(EXIT_FAILURE);
 	}

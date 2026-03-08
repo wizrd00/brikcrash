@@ -56,7 +56,6 @@ void modify_paddle(void)
 	coordinate_t cd = {.x = 0, .y = cx.pd.edge.top_edge};
 	switch (key) {
 	case KEY_ARROW_RIGHT :
-		printf("r\n");
 		cd.x = cx.pd.edge.rit_edge;
 		if (cx.bg.collide(&cx.bg, &cd) != BOTTOM_RIGHT_CORNER)
 			cx.pd.move_right(&cx.pd);
@@ -64,7 +63,6 @@ void modify_paddle(void)
 			cx.pd.move_right(&cx.pd);
 		break;
 	case KEY_ARROW_LEFT :
-		printf("l\n");
 		cd.x = cx.pd.edge.lft_edge;
 		if (cx.bg.collide(&cx.bg, &cd) != BOTTOM_LEFT_CORNER)
 			cx.pd.move_left(&cx.pd);

@@ -9,8 +9,8 @@
 
 #define ERROR_MSG "[!] Error -> (status code : %d) | (function : %s) | (message : %s)\n"
 #define FRAME_TITLE "BRIKCRASH"
-#define COEFFICIENT 10
-#define FRAME_INTERVAL 400000000
+#define COEFFICIENT 20
+#define FRAME_INTERVAL 100000000
 #define FRAME_MINI_INTERVAL (FRAME_INTERVAL / COEFFICIENT)
 #define GAP_LENGTH 4
 #define BRICK_ROW_COUNT 6
@@ -25,31 +25,6 @@
 #define COLLIDE_BOTTOM_EDGE(y) (y == bottom_edge)
 #define COLLIDE_RIGHT_EDGE(x) (x == right_edge)
 #define COLLIDE_LEFT_EDGE(x) (x == left_edge)
-
-#define SPECIFY_COLLIDE_TYPE(x, y)\
-	do {\
-		if (COLLIDE_TOP_EDGE(y)) {\
-			if (COLLIDE_RIGHT_EDGE(x))\
-				_coll = TOP_RIGHT_CORNER;\
-			else if (COLLIDE_LEFT_EDGE(x))\
-				_coll = TOP_LEFT_CORNER;\
-			else\
-				_coll = TOP_EDGE;\
-		} else if (COLLIDE_BOTTOM_EDGE(y)) {\
-			if (COLLIDE_RIGHT_EDGE(x))\
-				_coll = BOTTOM_RIGHT_CORNER;\
-			else if (COLLIDE_LEFT_EDGE(x))\
-				_coll = BOTTOM_LEFT_CORNER;\
-			else\
-				_coll = BOTTOM_EDGE;\
-		} else if (COLLIDE_RIGHT_EDGE(x)) {\
-			_coll = RIGHT_EDGE;\
-		} else if (COLLIDE_LEFT_EDGE(x)) {\
-			_coll = LEFT_EDGE;\
-		} else {\
-			_coll = NOCOLLIDE;\
-		}\
-	} while (0);
 
 typedef enum {
 	OBJ_SUCCESS,

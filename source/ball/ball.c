@@ -15,6 +15,7 @@ static coordinate_t get_coordinate(struct ball *bl)
 	case DOWN_LEFT_STEEP :
 	case DOWN_LEFT_SHALLOW :
 		cd.x = bl->block->x;
+		break;
 	}
 	cd.y = bl->block->y;
 	return cd;
@@ -63,28 +64,28 @@ static void swap_vector(struct ball *bl)
 {
 	switch (bl->vector) {
 	case UP_RIGHT_STEEP :
-		bl->vector = DOWN_LEFT_STEEP;
-		break;
-	case UP_RIGHT_SHALLOW :
-		bl->vector = DOWN_LEFT_SHALLOW;
-		break;
-	case UP_LEFT_STEEP :
 		bl->vector = DOWN_RIGHT_STEEP;
 		break;
-	case UP_LEFT_SHALLOW :
+	case UP_RIGHT_SHALLOW :
 		bl->vector = DOWN_RIGHT_SHALLOW;
 		break;
+	case UP_LEFT_STEEP :
+		bl->vector = DOWN_LEFT_STEEP;
+		break;
+	case UP_LEFT_SHALLOW :
+		bl->vector = DOWN_LEFT_SHALLOW;
+		break;
 	case DOWN_RIGHT_STEEP :
-		bl->vector = UP_LEFT_STEEP;
-		break;
-	case DOWN_RIGHT_SHALLOW :
-		bl->vector = UP_LEFT_SHALLOW;
-		break;
-	case DOWN_LEFT_STEEP :
 		bl->vector = UP_RIGHT_STEEP;
 		break;
-	case DOWN_LEFT_SHALLOW :
+	case DOWN_RIGHT_SHALLOW :
 		bl->vector = UP_RIGHT_SHALLOW;
+		break;
+	case DOWN_LEFT_STEEP :
+		bl->vector = UP_LEFT_STEEP;
+		break;
+	case DOWN_LEFT_SHALLOW :
+		bl->vector = UP_LEFT_SHALLOW;
 		break;
 	}
 	return;

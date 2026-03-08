@@ -3,6 +3,36 @@
 static context_t cx;
 static keyboard_t key;
 
+static bool check_paddle_collide(coordinate_t *cd)
+{
+	if (cx.pd.collide(&cx.pd, cd) != NOCOLLIDE) {
+		cx.bl.swap_vector(&cx.bl);
+		return true;
+	}
+	return false;
+}
+
+static bool check_bricks_collide(coordinate_t *cd)
+{
+	for (size_t i = 0; i < BRICK_ROW_COUNT; i++)
+		for (size_t j = 0; j < BRICK_COL_COUNT; j++)
+			if ((cx.bk[i][j].is_active(&cx.bk[i][j])) && (cx.bk[i][j].collide(&cx.bk[i][j], cd) != NOCOLLIDE)) {
+				cx.bk[i][j].disappear(&cx.bk[i][j]);
+				cx.bl.swap_vector(&cx.bl);
+				return true;
+			}
+	return false;
+}
+
+static bool check_frame_collide(coordinate_t *cd)
+{
+	if (cx.bg.collide(&cx.bg, cd) != NOCOLLIDE) {
+		cx.bl.swap_vector(&cx.bl);
+		return true;
+	}
+	return false;
+}
+
 void create_context(void)
 {
 	status_t _stat;
@@ -73,9 +103,21 @@ void modify_paddle(void)
 	return;
 }
 
-void modify_ball(void)
+void check_collide(void)
 {
 	coordinate_t cd = cx.bl.get_coordinate(&cx.bl);
+	if (check_paddle_collide(&cd))
+		return;
+	if (check_bricks_collide(&cd))
+		return;
+	if (check_frame_collide(&cd))
+		return;
+	return;
+}
+
+void modify_ball(void)
+{
+	cx.bl.apply_next_move(&cx.bl);
 	return;
 }
 
@@ -107,6 +149,7 @@ int main(void)
 		}
 		modify_ball();
 		render();
+		check_collide();
 	}
 	deinit();
 	return 0;

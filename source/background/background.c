@@ -7,14 +7,14 @@ static collide_t collide(struct background *bg, coordinate_t *cd)
 	size_t bottom_edge = bg->edge.btm_edge - 1;
 	size_t right_edge = bg->edge.rit_edge - 1;
 	size_t left_edge = bg->edge.lft_edge + 1;
-	SPECIFY_COLLIDE_TYPE(cd->x, cd->y);
+	SPECIFY_BACKGROUND_COLLIDE_TYPE(cd->x, cd->y);
 	if (_coll != NOCOLLIDE)
 		return _coll;
 	top_edge--;
 	bottom_edge++;
 	right_edge++;
 	left_edge--;
-	SPECIFY_COLLIDE_TYPE(cd->x, cd->y);
+	SPECIFY_BACKGROUND_COLLIDE_TYPE(cd->x, cd->y);
 	return _coll;
 }
 

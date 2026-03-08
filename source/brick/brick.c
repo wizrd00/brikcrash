@@ -6,6 +6,11 @@ static void disappear(struct brick *bk)
 	return;
 }
 
+static bool is_active(struct brick *bk)
+{
+	return bk->block->active;
+}
+
 static collide_t collide(struct brick *bk, coordinate_t *cd)
 {
 	collide_t _coll;
@@ -13,14 +18,14 @@ static collide_t collide(struct brick *bk, coordinate_t *cd)
 	size_t bottom_edge = bk->edge.btm_edge + 1;
 	size_t right_edge = bk->edge.rit_edge + 1;
 	size_t left_edge = (bk->edge.lft_edge != 0) ? bk->edge.lft_edge - 1 : bk->edge.lft_edge;
-	SPECIFY_COLLIDE_TYPE(cd->x, cd->y);
+	SPECIFY_BRICK_COLLIDE_TYPE(cd->x, cd->y);
 	if (_coll != NOCOLLIDE)
 		return _coll;
 	top_edge++;
 	bottom_edge--;
 	right_edge--;
 	left_edge++;
-	SPECIFY_COLLIDE_TYPE(cd->x, cd->y);
+	SPECIFY_BRICK_COLLIDE_TYPE(cd->x, cd->y);
 	return _coll;
 }
 
@@ -48,6 +53,7 @@ obj_status_t create_brick(matrix_t *matrix, brick_t *brick, pixel_t *pixel, coor
 	brick->edge.rit_edge = brick->block->x + brick->block->len - 1;
 	brick->edge.lft_edge = brick->block->x;
 	brick->disappear = disappear;
+	brick->is_active = is_active;
 	brick->collide = collide;
 	return _stat;
 }

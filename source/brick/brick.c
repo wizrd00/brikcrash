@@ -6,6 +6,12 @@ static void disappear(struct brick *bk)
 	return;
 }
 
+static void activate(struct brick *bk)
+{
+	bk->block->active = true;
+	return;
+}
+
 static bool is_active(struct brick *bk)
 {
 	return bk->block->active;
@@ -45,6 +51,7 @@ obj_status_t create_brick(matrix_t *matrix, brick_t *brick, pixel_t *pixel, coor
 	brick->edge.rit_edge = brick->block->x + brick->block->len - 1;
 	brick->edge.lft_edge = brick->block->x;
 	brick->disappear = disappear;
+	brick->activate = activate;
 	brick->is_active = is_active;
 	brick->collide = collide;
 	return _stat;

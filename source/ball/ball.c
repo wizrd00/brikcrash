@@ -21,6 +21,13 @@ static coordinate_t get_coordinate(struct ball *bl)
 	return cd;
 }
 
+static void set_coordinate(struct ball *bl, coordinate_t *cd)
+{
+	bl->block->x = cd->x;
+	bl->block->y = cd->y;
+	return;
+}
+
 static void apply_next_move(struct ball *bl)
 {
 	switch (bl->vector) {
@@ -110,6 +117,7 @@ obj_status_t create_ball(matrix_t *matrix, ball_t *ball, pixel_t *pixel, coordin
 		return _stat = OBJ_FAILURE;
 	ball->vector = FIRST_VECTOR;
 	ball->get_coordinate = get_coordinate;
+	ball->set_coordinate = set_coordinate;
 	ball->apply_next_move = apply_next_move;
 	ball->swap_vector = swap_vector;
 	return _stat;

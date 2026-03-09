@@ -11,6 +11,20 @@ static void game_over(void)
 	return;
 }
 
+static void reset_bricks(void)
+{
+	for (size_t i = 0; i < BRICK_ROW_COUNT; i++)
+		for (size_t j = 0; j < BRICK_COL_COUNT; j++)
+			BRICK(i, j).activate(&BRICK(i, j));
+	return;
+}
+
+static void reset_ball(void)
+{
+	cx.bl.set_coordinate(&cx.bl, BALL_COORDINATE());
+	return;
+}
+
 static void paddle_collide_top_right_corner(void)
 {
 	switch (cx.bl.vector) {
@@ -262,6 +276,7 @@ static bool check_paddle_collide(coordinate_t *cd)
 
 static bool check_bricks_collide(coordinate_t *cd)
 {
+	size_t count = 0;
 	for (size_t i = 0; i < BRICK_ROW_COUNT; i++)
 		for (size_t j = 0; j < BRICK_COL_COUNT; j++)
 			if (BRICK(i, j).is_active(&BRICK(i, j))) {
@@ -279,7 +294,13 @@ static bool check_bricks_collide(coordinate_t *cd)
 					BRICK(i, j).disappear(&BRICK(i, j));
 					return true;
 				}
+			} else {
+				count++;
 			}
+	if (count == BRICK_ROW_COUNT * BRICK_COL_COUNT) {
+		reset_bricks();
+		reset_ball();
+	}
 	return false;
 }
 

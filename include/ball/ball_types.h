@@ -20,6 +20,7 @@ typedef struct ball {
 	object_t *block;
 	vector_t vector;
 	coordinate_t (*get_coordinate)(struct ball *bl);
+	void (*set_coordinate)(struct ball *bl, coordinate_t *cd);
 	void (*apply_next_move)(struct ball *bl);
 	void (*swap_vector)(struct ball *bl);
 } ball_t;

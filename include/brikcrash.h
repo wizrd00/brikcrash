@@ -22,11 +22,11 @@
 
 #define FLOOR_PIXEL() {.ulbd = NONE, .bgnd = LBGBLACK, .fgnd = LFGBLACK, .cval = ' '}
 
-#define FRAME_PIXEL() {.ulbd = NONE, .bgnd = LBGWHITE, .fgnd = LFGWHITE, .cval = ' '}
+#define FRAME_PIXEL() {.ulbd = NONE, .bgnd = LBGWHITE, .fgnd = LFGBLACK, .cval = ' '}
 
-#define PADDLE_PIXEL() {.ulbd = NONE, .bgnd = HBGBLUE, .fgnd = HFGBLUE, .cval = ' '}
+#define PADDLE_PIXEL() {.ulbd = NONE, .bgnd = LBGPURPLE, .fgnd = LFGBLACK, .cval = ' '}
 
-#define BALL_PIXEL() {.ulbd = NONE, .bgnd = HBGCYAN, .fgnd = HFGCYAN, .cval = ' '}
+#define BALL_PIXEL() {.ulbd = NONE, .bgnd = LBGCYAN, .fgnd = LFGBLACK, .cval = ' '}
 
 #define BRICK_RED_PIXEL() {.ulbd = NONE, .bgnd = LBGRED, .fgnd = LFGBLACK, .cval = ' '}
 

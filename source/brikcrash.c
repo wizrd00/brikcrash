@@ -337,11 +337,11 @@ void create_elements(void)
 	pixel_t bl_pixel = BALL_PIXEL();
 	pixel_t bk_pixel[BRICK_ROW_COUNT] = {
 		BRICK_RED_PIXEL(),
+		BRICK_BLUE_PIXEL(),
 		BRICK_RED_PIXEL(),
+		BRICK_BLUE_PIXEL(),
 		BRICK_RED_PIXEL(),
-		BRICK_RED_PIXEL(),
-		BRICK_RED_PIXEL(),
-		BRICK_RED_PIXEL()
+		BRICK_BLUE_PIXEL()
 	};
 	TRYOBJ(create_background(&cx.mx, &cx.bg, &bg_floor_pixel, &bg_frame_pixel, FLOOR_LENGTH, FLOOR_WIDTH, FRAME_TITLE), "failed to create background object");
 	cx.floor_x = cx.bg.floor->x;
@@ -389,10 +389,8 @@ void check_collide(void)
 	coordinate_t cd = cx.bl.get_coordinate(&cx.bl);
 	if (check_paddle_collide(&cd))
 		return;
-	if (check_bricks_collide(&cd))
-		return;
-	if (check_frame_collide(&cd))
-		return;
+	check_bricks_collide(&cd);
+	check_frame_collide(&cd);
 	return;
 }
 

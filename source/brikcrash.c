@@ -343,15 +343,21 @@ void create_context(void)
 		TRYCALL((errno > 0) ? -errno : errno, strerror(errno));
 	cx.mx.row = (size_t) ws.ws_row;
 	cx.mx.col = (size_t) ws.ws_col;
+	if ((cx.mx.row < FLOOR_WIDTH) || (cx.mx.col < FLOOR_LENGTH)) {
+		fprintf(stderr, ERROR_MSG, -1, __func__, "invalid terminal size, min(ROW) = 24, min(COL) = 96");
+		exit(EXIT_FAILURE);
+	}
 	if ((_stat = mx_init(&cx.mx, true, true)) != SUCCESS) {
 		fprintf(stderr, ERROR_MSG, _stat, __func__, "failed to init terrenity");
 		exit(EXIT_FAILURE);
 	}
+	mx_hide_cursor();
 	return;
 }
 
 void create_elements(void)
 {
+	pixel_t bg_blank_pixel = BLANK_PIXEL();
 	pixel_t bg_floor_pixel = FLOOR_PIXEL();
 	pixel_t bg_frame_pixel = FRAME_PIXEL();
 	pixel_t pd_pixel = PADDLE_PIXEL();
@@ -364,6 +370,7 @@ void create_elements(void)
 		BRICK_RED_PIXEL(),
 		BRICK_BLUE_PIXEL()
 	};
+	mx_fill(&cx.mx, &bg_blank_pixel);
 	TRYOBJ(create_background(&cx.mx, &cx.bg, &bg_floor_pixel, &bg_frame_pixel, FLOOR_LENGTH, FLOOR_WIDTH, FRAME_TITLE), "failed to create background object");
 	cx.floor_x = cx.bg.floor->x;
 	cx.floor_y = cx.bg.floor->y;
@@ -380,6 +387,7 @@ void create_elements(void)
 void deinit(void)
 {
 	TRYCALL(mx_deinit(&cx.mx), "failed to deinit terrenity");
+	mx_show_cursor();
 	return;
 }
 
@@ -425,8 +433,7 @@ void render(void)
 {
 	pixel_t blank_pixel = BLANK_PIXEL();
 	mx_clear();
-	TRYCALL(mx_fill(&cx.mx, &blank_pixel), "failed to fill screen with blank pixels");
-	TRYCALL(mx_refresh(&cx.mx), "failed to refresh");
+	mx_refresh(&cx.mx);
 	TRYCALL(mx_render(&cx.mx, NULL), "failed to render");
 	return;
 }

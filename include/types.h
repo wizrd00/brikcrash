@@ -9,7 +9,7 @@
 
 #define ERROR_MSG "[!] Error -> (status code : %d) | (function : %s) | (message : %s)\n"
 #define FRAME_TITLE "BRIKCRASH"
-#define COEFFICIENT 25
+#define COEFFICIENT 20
 #define FRAME_INTERVAL 80000000
 #define FRAME_MINI_INTERVAL (FRAME_INTERVAL / COEFFICIENT)
 #define GAP_LENGTH 4

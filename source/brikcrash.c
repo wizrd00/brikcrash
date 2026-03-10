@@ -22,6 +22,7 @@ static void reset_bricks(void)
 static void reset_ball(void)
 {
 	cx.bl.set_coordinate(&cx.bl, BALL_COORDINATE());
+	cx.bl.vector = FIRST_VECTOR;
 	return;
 }
 

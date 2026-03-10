@@ -431,7 +431,6 @@ void modify_ball(void)
 
 void render(void)
 {
-	pixel_t blank_pixel = BLANK_PIXEL();
 	mx_clear();
 	mx_refresh(&cx.mx);
 	TRYCALL(mx_render(&cx.mx, NULL), "failed to render");

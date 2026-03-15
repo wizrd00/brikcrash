@@ -28,7 +28,7 @@
 		} else {\
 			_coll = NOCOLLIDE;\
 		}\
-	} while (0);
+	} while (0)
 
 obj_status_t create_background(matrix_t *matrix, background_t *background, pixel_t *floor_pixel, pixel_t *frame_pixel, size_t length, size_t width, const char *title);
 

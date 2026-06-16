@@ -1,5 +1,8 @@
 # BrikCrash
-
+![Language](https://img.shields.io/badge/language-C-blue)
+![Build](https://img.shields.io/badge/build-Make-success)
+![Platform](https://img.shields.io/badge/platform-Linux-green)
+![License](https://img.shields.io/badge/license-MIT-lightgrey)
 A terminal-based clone of the classic Atari Breakout game written entirely in C.
 
 BrikCrash runs directly inside the terminal and uses the custom **Terrenity** graphics engine for rendering, input handling, and frame management. The project demonstrates game development concepts such as collision detection, object management, game loops, and terminal graphics programming without relying on external game frameworks.

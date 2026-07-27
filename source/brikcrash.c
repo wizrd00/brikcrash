@@ -41,6 +41,8 @@ static void paddle_collide_top_right_corner(void)
 	case DOWN_LEFT_SHALLOW :
 		cx.bl.vector = UP_LEFT_SHALLOW;
 		break;
+	default :
+		break;
 	}
 	return;
 }
@@ -59,6 +61,8 @@ static void paddle_collide_top_left_corner(void)
 		break;
 	case DOWN_LEFT_SHALLOW :
 		cx.bl.vector = UP_RIGHT_SHALLOW;
+		break;
+	default :
 		break;
 	}
 	return;
@@ -91,6 +95,8 @@ static void brick_collide_top_edge(void)
 	case DOWN_LEFT_SHALLOW :
 		cx.bl.vector = UP_LEFT_SHALLOW;
 		break;
+	default :
+		break;
 	}
 	return;
 }
@@ -121,6 +127,8 @@ static void brick_collide_top_right_corner(void)
 		break;
 	case DOWN_LEFT_SHALLOW :
 		cx.bl.vector = UP_RIGHT_SHALLOW;
+		break;
+	default :
 		break;
 	}
 	return;
@@ -153,17 +161,13 @@ static void brick_collide_top_left_corner(void)
 	case DOWN_LEFT_SHALLOW :
 		cx.bl.vector = UP_LEFT_SHALLOW;
 		break;
+	default :
+		break;
 	}
 	return;
 }
 
 static void frame_collide_top_edge(void)
-{
-	cx.bl.swap_vector(&cx.bl);
-	return;
-}
-
-static void frame_collide_bottom_edge(void)
 {
 	cx.bl.swap_vector(&cx.bl);
 	return;
@@ -184,6 +188,8 @@ static void frame_collide_right_edge(void)
 	case DOWN_RIGHT_SHALLOW :
 		cx.bl.vector = DOWN_LEFT_SHALLOW;
 		break;
+	default :
+		break;
 	}
 	return;
 }
@@ -203,6 +209,8 @@ static void frame_collide_left_edge(void)
 	case DOWN_LEFT_SHALLOW :
 		cx.bl.vector = DOWN_RIGHT_SHALLOW;
 		break;
+	default :
+		break;
 	}
 	return;
 }
@@ -215,6 +223,8 @@ static void frame_collide_top_right_corner(void)
 		break;
 	case UP_RIGHT_SHALLOW :
 		cx.bl.vector = DOWN_LEFT_SHALLOW;
+		break;
+	default :
 		break;
 	}
 	return;
@@ -229,31 +239,7 @@ static void frame_collide_top_left_corner(void)
 	case UP_LEFT_SHALLOW :
 		cx.bl.vector = DOWN_RIGHT_SHALLOW;
 		break;
-	}
-	return;
-}
-
-static void frame_collide_bottom_right_corner(void)
-{
-	switch (cx.bl.vector) {
-	case DOWN_RIGHT_STEEP :
-		cx.bl.vector = UP_LEFT_STEEP;
-		break;
-	case DOWN_RIGHT_SHALLOW :
-		cx.bl.vector = UP_LEFT_SHALLOW;
-		break;
-	}
-	return;
-}
-
-static void frame_collide_bottom_left_corner(void)
-{
-	switch (cx.bl.vector) {
-	case DOWN_LEFT_STEEP :
-		cx.bl.vector = UP_RIGHT_STEEP;
-		break;
-	case DOWN_LEFT_SHALLOW :
-		cx.bl.vector = UP_RIGHT_SHALLOW;
+	default :
 		break;
 	}
 	return;
@@ -271,6 +257,8 @@ static bool check_paddle_collide(coordinate_t *cd)
 	case TOP_LEFT_CORNER :
 		paddle_collide_top_left_corner();
 		return true;
+	default :
+		break;
 	}
 	return false;
 }
@@ -294,6 +282,8 @@ static bool check_bricks_collide(coordinate_t *cd)
 					brick_collide_top_left_corner();
 					BRICK(i, j).disappear(&BRICK(i, j));
 					return true;
+				default :
+					break;
 				}
 			} else {
 				count++;
@@ -332,6 +322,8 @@ static bool check_frame_collide(coordinate_t *cd)
 	case BOTTOM_LEFT_CORNER :
 		game_over();
 		return true;
+	default :
+		break;
 	}
 	return false;
 }
@@ -409,6 +401,8 @@ void modify_paddle(void)
 			cx.pd.move_left(&cx.pd);
 		if (cx.bg.collide(&cx.bg, &cd) != BOTTOM_LEFT_CORNER)
 			cx.pd.move_left(&cx.pd);
+		break;
+	default :
 		break;
 	}
 	return;

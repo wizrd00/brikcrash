@@ -4,3 +4,4 @@ WARN
 *.o
 *.bin
 tools/
+brikcrash

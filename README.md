@@ -31,10 +31,26 @@ BrikCrash runs directly inside the terminal and uses the custom **Terrenity** gr
 
 ---
 
-## Build
+## Build on OpenBSD
 
-```bash
+compiling with clang
+```sh
 make
+```
+or with gcc
+```sh
+make CC=gcc
+```
+
+## Build on Linux
+
+compiling with clang
+```sh
+make -f GMakefile
+```
+or with gcc
+```sh
+make CC=gcc -f GMakefile
 ```
 
 The executable will be generated after a successful build.
@@ -43,7 +59,7 @@ The executable will be generated after a successful build.
 
 ## Running
 
-```bash
+```sh
 ./brikcrash
 ```
 

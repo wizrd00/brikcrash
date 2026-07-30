@@ -1,7 +1,7 @@
 # BrikCrash
 ![Language](https://img.shields.io/badge/language-C-blue)
 ![Build](https://img.shields.io/badge/build-Make-success)
-![Platform](https://img.shields.io/badge/platform-Linux-green)
+![Platform](https://img.shields.io/badge/platform-Unix-green)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
 A terminal-based clone of the classic Atari Breakout game written entirely in C.
@@ -57,7 +57,7 @@ The executable will be generated after a successful build.
 
 ---
 
-## Running
+## Running (press q to quit)
 
 ```sh
 ./brikcrash
@@ -85,35 +85,6 @@ BrikCrash was built as a systems-programming-oriented game project and includes:
 
 ---
 
-## Project Structure
-
-```text
-brikcrash/
-├── assets/
-│   └── gameplay.gif
-├── include/
-│   ├── background/
-│   ├── ball/
-│   ├── brick/
-│   ├── keyboard/
-│   ├── paddle/
-│   ├── terrenity/
-│   └── brikcrash.h
-├── source/
-│   ├── background/
-│   ├── ball/
-│   ├── brick/
-│   ├── keyboard/
-│   ├── paddle/
-│   └── brikcrash.c
-├── library/
-│   ├── libterrenity-glibc.so
-│   └── libterrenity-musl.so
-└── Makefile
-```
-
----
-
 ## About Terrenity
 
 BrikCrash is built on top of **Terrenity**, a terminal graphics engine written in pure C.
@@ -130,13 +101,13 @@ Terrenity provides:
 
 ## Requirements
 
-- Linux
+- Unix-like (any unix-like that includes `termios.h`)
 - C99 Compiler
 - POSIX-compatible terminal
 
 Tested with:
 
-- PCC
+- CLANG
 - GCC
 
 ---

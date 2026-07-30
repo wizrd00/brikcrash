@@ -98,12 +98,12 @@ static void swap_vector(struct ball *bl)
 	return;
 }
 
-obj_status_t create_ball(matrix_t *matrix, ball_t *ball, pixel_t *pixel, coordinate_t *coordinate)
+obj_status_t create_ball(struct matrix *matrix, ball_t *ball, struct pixel *pixel, coordinate_t *coordinate)
 {
 	obj_status_t _stat = OBJ_SUCCESS;
 	if ((coordinate->x >= matrix->col) || (coordinate->y >= matrix->row))
 		return _stat = OBJ_BADCOORDINATE;
-	object_t ball_obj = {
+	struct object ball_obj = {
 		.shape = RECTANGLE,
 		.pixel = *pixel,
 		.active = true,

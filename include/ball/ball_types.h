@@ -17,7 +17,7 @@ typedef enum {
 } vector_t;
 
 typedef struct ball {
-	object_t *block;
+	struct object *block;
 	vector_t vector;
 	coordinate_t (*get_coordinate)(struct ball *bl);
 	void (*set_coordinate)(struct ball *bl, coordinate_t *cd);

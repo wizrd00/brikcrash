@@ -20,6 +20,6 @@
 		}\
 	} while (0)
 
-obj_status_t create_brick(matrix_t *matrix, brick_t *brick, pixel_t *pixel, coordinate_t *coordinate, size_t length);
+obj_status_t create_brick(struct matrix *matrix, brick_t *brick, struct pixel *pixel, coordinate_t *coordinate, size_t length);
 
 #endif

@@ -330,7 +330,7 @@ static bool check_frame_collide(coordinate_t *cd)
 
 void create_context(void)
 {
-	status_t _stat;
+	status _stat;
 	struct winsize ws;
 	if (ioctl(fileno(stdout), TIOCGWINSZ, &ws) != 0)
 		TRYCALL((errno > 0) ? -errno : errno, strerror(errno));
@@ -350,12 +350,12 @@ void create_context(void)
 
 void create_elements(void)
 {
-	pixel_t bg_blank_pixel = BLANK_PIXEL();
-	pixel_t bg_floor_pixel = FLOOR_PIXEL();
-	pixel_t bg_frame_pixel = FRAME_PIXEL();
-	pixel_t pd_pixel = PADDLE_PIXEL();
-	pixel_t bl_pixel = BALL_PIXEL();
-	pixel_t bk_pixel[BRICK_ROW_COUNT] = {
+	struct pixel bg_blank_pixel = BLANK_PIXEL();
+	struct pixel bg_floor_pixel = FLOOR_PIXEL();
+	struct pixel bg_frame_pixel = FRAME_PIXEL();
+	struct pixel pd_pixel = PADDLE_PIXEL();
+	struct pixel bl_pixel = BALL_PIXEL();
+	struct pixel bk_pixel[BRICK_ROW_COUNT] = {
 		BRICK_RED_PIXEL(),
 		BRICK_BLUE_PIXEL(),
 		BRICK_RED_PIXEL(),
@@ -434,20 +434,22 @@ void render(void)
 
 int main(void)
 {
-	bool lock = true;
+	bool quit = false;
 	create_context();
 	create_elements();
-	while (lock) {
+	while (1) {
 		for (int i = 0; i < COEFFICIENT; i++) {
 			key = getkey();
-			if (key == KEY_ESC) {
-				lock = false;
+			if (key == KEY_QUIT) {
+				quit = true;
 				break;
 			}
 			modify_paddle();
 			render();
 			WAIT_MINI_INTERVAL();
 		}
+		if (quit)
+			break;
 		modify_ball();
 		render();
 		check_collide();

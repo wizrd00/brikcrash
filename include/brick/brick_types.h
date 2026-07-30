@@ -4,7 +4,7 @@
 #include "types.h"
 
 typedef struct brick {
-	object_t *block;
+	struct object *block;
 	edge_t edge;
 	void (*disappear)(struct brick *bk);
 	void (*activate)(struct brick *bk);

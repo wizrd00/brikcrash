@@ -43,7 +43,7 @@ static void get_special_key(keyboard_t *key)
 keyboard_t getkey(void)
 {
 	keyboard_t key;
-	status_t _stat;
+	status _stat;
 	unsigned char keychar;
 	if (!is_available(POLL_TIMEOUT))
 		return key = KEY_NONE;
@@ -63,6 +63,10 @@ keyboard_t getkey(void)
 	case SPACE_CHAR :
 		FLUSH();
 		key = KEY_SPACE;
+		break;
+	case QUIT_CHAR :
+		FLUSH();
+		key = KEY_QUIT;
 		break;
 	default :
 		key = KEY_NONE;

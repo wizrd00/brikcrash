@@ -27,14 +27,14 @@ static collide_t collide(struct brick *bk, coordinate_t *cd)
 	return _coll;
 }
 
-obj_status_t create_brick(matrix_t *matrix, brick_t *brick, pixel_t *pixel, coordinate_t *coordinate, size_t length)
+obj_status_t create_brick(struct matrix *matrix, brick_t *brick, struct pixel *pixel, coordinate_t *coordinate, size_t length)
 {
 	obj_status_t _stat = OBJ_SUCCESS;
 	if ((coordinate->x >= matrix->col) || (coordinate->y >= matrix->row))
 		return _stat = OBJ_BADCOORDINATE;
 	if ((length == 0) || (length + coordinate->x > matrix->col))
 		return _stat = OBJ_BADLENGTH;
-	object_t brick_obj = {
+	struct object brick_obj = {
 		.shape = RECTANGLE,
 		.pixel = *pixel,
 		.active = true,

@@ -49,7 +49,7 @@
 	do {if (val != OBJ_SUCCESS) {fprintf(stderr, ERROR_MSG, val, __func__, __VA_ARGS__); deinit(); exit(EXIT_FAILURE);}} while (0)
 
 typedef struct {
-	matrix_t mx;
+	struct matrix mx;
 	background_t bg;
 	brick_t bk[BRICK_ROW_COUNT][BRICK_COL_COUNT];
 	paddle_t pd;

@@ -10,8 +10,8 @@
 #define CALC_FLOOR_Y(matrix_row, floor_wid) ((matrix_row - floor_wid) / (size_t) 2)
 
 typedef struct background {
-	object_t *floor;
-	object_t *frame;
+	struct object *floor;
+	struct object *frame;
 	char title[MAX_TITLE_SIZE];
 	edge_t edge;
 	collide_t (*collide)(struct background *bg, coordinate_t *cd);

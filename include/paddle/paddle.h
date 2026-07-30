@@ -20,6 +20,6 @@
 		}\
 	} while (0)
 
-obj_status_t create_paddle(matrix_t *matrix, paddle_t *paddle, pixel_t *pixel, coordinate_t *coordinate, size_t length);
+obj_status_t create_paddle(struct matrix *matrix, paddle_t *paddle, struct pixel *pixel, coordinate_t *coordinate, size_t length);
 
 #endif

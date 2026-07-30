@@ -4,7 +4,7 @@
 #include "types.h"
 
 typedef struct paddle {
-	object_t *block;
+	struct object *block;
 	edge_t edge;
 	bool movable_rit;
 	bool movable_lft;

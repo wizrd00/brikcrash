@@ -33,14 +33,14 @@ static collide_t collide(struct paddle *pd, coordinate_t *cd)
 	return _coll;
 }
 
-obj_status_t create_paddle(matrix_t *matrix, paddle_t *paddle, pixel_t *pixel, coordinate_t *coordinate, size_t length)
+obj_status_t create_paddle(struct matrix *matrix, paddle_t *paddle, struct pixel *pixel, coordinate_t *coordinate, size_t length)
 {
 	obj_status_t _stat = OBJ_SUCCESS;
 	if ((coordinate->x >= matrix->col) || (coordinate->y >= matrix->row))
 		return _stat = OBJ_BADCOORDINATE;
 	if ((length == 0) || (length + coordinate->x > matrix->col))
 		return _stat = OBJ_BADLENGTH;
-	object_t paddle_obj = {
+	struct object paddle_obj = {
 		.shape = RECTANGLE,
 		.pixel = *pixel,
 		.active = true,

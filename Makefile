@@ -1,4 +1,4 @@
-CC = pcc
+CC = clang
 
 SRC_DIR := source
 INC_DIR := include
@@ -9,7 +9,7 @@ BRIKCRASH := brikcrash
 TERRENITY := terrenity
 
 ifeq ($(CC), clang)
-CFLAGS := -std=c99 -O3 -Werror -Wall -Wextra -Wpedantic
+CFLAGS := -std=gnu99 -O3 -Werror -Wall -Wextra -Wpedantic -Wno-unused-command-line-argument
 LIB_FLAGS := -Wl,--library-path=$(LIB_DIR),--library=$(TERRENITY),-rpath=$(LIB_DIR)
 else ifeq ($(CC), gcc)
 CFLAGS := -std=gnu99 -O3 -Werror -Wall -Wextra -Wpedantic
